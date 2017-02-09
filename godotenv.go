@@ -21,6 +21,34 @@ import (
 	"strings"
 )
 
+// From will read your env s and load them into ENV for this process.
+//
+// Call this function as close as possible to the start of your program (ideally in main)
+//
+// It's important to note that it WILL OVERRIDE an env variable that already exists
+// - consider the .env file to set dev vars or sensible defaults
+
+func From(data string) (err error) {
+	envMap := make(map[string]string)
+	lines := strings.Split(data, "\n")
+
+	for _, fullLine := range lines {
+		if !isIgnoredLine(fullLine) {
+			key, value, err := parseLine(fullLine)
+
+			if err == nil {
+				envMap[key] = value
+			}
+		}
+	}
+
+	for key, value := range envMap {
+		os.Setenv(key, value)
+	}
+
+	return
+}
+
 // Load will read your env file(s) and load them into ENV for this process.
 //
 // Call this function as close as possible to the start of your program (ideally in main)
