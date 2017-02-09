@@ -1,5 +1,6 @@
 language: go
 go:
   - release
+sudo: true
 script:
   - go test -v ./...
