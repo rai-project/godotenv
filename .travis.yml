@@ -1,6 +1,6 @@
 language: go
 go:
-  - auto
+  - '1.7'
 sudo: true
 script:
   - go test -v ./...
