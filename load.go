@@ -14,10 +14,7 @@
 package godotenv
 
 import (
-	"bufio"
-	"errors"
 	"os"
-	"os/exec"
 	"strings"
 )
 
